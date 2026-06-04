@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>데일리 뉴스 브리핑</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+            background: #F2F2F7;
+            color: #1D1D1F;
+            line-height: 1.6;
+        }
+
+        /* ── 상단 바 ── */
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255,255,255,0.78);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 0.5px solid rgba(0,0,0,0.12);
+            padding: 14px 24px;
+        }
+        .topbar-inner {
+            max-width: 760px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .topbar-title { font-size: 16px; font-weight: 600; }
+        .topbar-date {
+            font-size: 13px;
+            color: #6E6E73;
+            background: #F2F2F7;
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        /* ── 본문 ── */
+        .container {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 36px 20px 60px;
+        }
+
+        /* ── 히어로 ── */
+        .hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .hero h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.8px;
+            margin-bottom: 8px;
+        }
+        .hero p { font-size: 17px; color: #6E6E73; }
+
+        /* ── 섹션 ── */
+        .section { margin-bottom: 36px; }
+
+        .section-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+        .section-icon {
+            width: 38px; height: 38px;
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px;
+        }
+        .politics  .section-icon { background: #EEF2FF; }
+        .economy   .section-icon { background: #F0FDF4; }
+        .society   .section-icon { background: #FFF7ED; }
+
+        .section-name {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        /* ── 카드 ── */
+        .card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+
+        .issue-title {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            margin-bottom: 12px;
+        }
+
+        .summary-box {
+            background: #F2F2F7;
+            border-radius: 12px;
+            border-left: 3px solid #007AFF;
+            padding: 12px 16px;
+            font-size: 15px;
+            color: #3A3A3C;
+            margin-bottom: 18px;
+        }
+
+        .bg-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: #8E8E93;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .bg-text {
+            font-size: 15px;
+            color: #3A3A3C;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        /* ── 관점 표 ── */
+        .perspectives {
+            border: 1px solid #E5E5EA;
+            border-radius: 14px;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+        .prow {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 14px 16px;
+            border-bottom: 1px solid #F2F2F7;
+        }
+        .prow:last-child { border-bottom: none; }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 20px;
+            white-space: nowrap;
+            min-width: 68px;
+            justify-content: center;
+        }
+        .badge-c { background: #EFF6FF; color: #1D4ED8; }
+        .badge-p { background: #FEF2F2; color: #DC2626; }
+        .badge-n { background: #F3F4F6; color: #374151; }
+
+        .ptext { font-size: 14px; color: #3A3A3C; line-height: 1.65; flex: 1; padding-top: 2px; }
+
+        /* ── 한마디 ── */
+        .keytip {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            background: #F2F2F7;
+            border-radius: 12px;
+            padding: 14px 16px;
+            font-size: 14px;
+            color: #1D1D1F;
+        }
+        .keytip-label { color: #007AFF; font-weight: 600; white-space: nowrap; }
+
+        /* ── 용어 카드 ── */
+        .vocab-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        .vocab-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+        .vitem {
+            padding: 13px 0;
+            border-bottom: 1px solid #F2F2F7;
+        }
+        .vitem:last-child { border-bottom: none; padding-bottom: 0; }
+        .vterm { font-size: 15px; font-weight: 600; margin-bottom: 3px; }
+        .vdef  { font-size: 14px; color: #6E6E73; line-height: 1.55; }
+
+        /* ── 푸터 ── */
+        .footer {
+            text-align: center;
+            margin-top: 48px;
+            font-size: 13px;
+            color: #8E8E93;
+        }
+
+        /* ── 로딩 상태 (내용 없을 때) ── */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #8E8E93;
+        }
+        .empty-state h2 { font-size: 22px; font-weight: 600; margin-bottom: 10px; color: #1D1D1F; }
+        .empty-state p { font-size: 15px; line-height: 1.6; }
+    </style>
+</head>
+<body>
+
+<div class="topbar">
+    <div class="topbar-inner">
+        <span class="topbar-title">📰 데일리 뉴스 브리핑</span>
+        <span class="topbar-date" id="today-date"></span>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="hero">
+        <h1>오늘의 핵심 뉴스</h1>
+        <p>정치 · 경제 · 사회를 다양한 시각으로</p>
+    </div>
+
+    <!-- ─── 정치 ─── -->
+    <div class="section politics">
+        <div class="section-label">
+            <div class="section-icon">🏛</div>
+            <span class="section-name">정치</span>
+        </div>
+        <div class="card">
+            <div class="issue-title">대통령 탄핵 심판 선고 D-3, 각 당 대응 본격화</div>
+            <div class="summary-box">한 줄 요약: 헌재 선고를 앞두고 여야가 상반된 대국민 메시지를 쏟아내며 여론전에 돌입했다.</div>
+
+            <div class="bg-label">배경</div>
+            <div class="bg-text">헌법재판소(나라의 법이 헌법에 맞는지 판단하는 최고 법원)가 이번 주 안으로 대통령 탄핵에 대한 최종 결정을 내릴 예정입니다. 탄핵이 인용되면 대통령직을 잃고, 기각되면 복귀하게 됩니다. 이 결정을 앞두고 여야 정당들이 각자 유리한 방향으로 여론을 움직이려 하고 있습니다.</div>
+
+            <div class="perspectives">
+                <div class="prow">
+                    <span class="badge badge-c">🔵 보수</span>
+                    <span class="ptext">조선·동아 등은 "탄핵 기각 시 국정 안정화가 시급하다"며 조기 복귀 시나리오를 긍정적으로 다루고 있다.</span>
+                </div>
+                <div class="prow">
+                    <span class="badge badge-p">🔴 진보</span>
+                    <span class="ptext">한겨레·경향은 "국민 다수가 탄핵 인용을 요구하고 있다"며 헌재가 민의를 따라야 한다고 강조한다.</span>
+                </div>
+                <div class="prow">
+                    <span class="badge badge-n">⚪ 중립</span>
+                    <span class="ptext">연합뉴스·KBS는 선고 일정과 절차를 중립적으로 전하며 결과에 따른 후속 일정을 정리했다.</span>
+                </div>
+            </div>
+
+            <div class="keytip">
+                <span class="keytip-label">💡 한마디</span>
+                <span>헌재 결정이 어떻게 나오든 정국 변화가 불가피하다. 선고 이후 여야의 움직임을 주목할 것.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ─── 경제 ─── -->
+    <div class="section economy">
+        <div class="section-label">
+            <div class="section-icon">💰</div>
+            <span class="section-name">경제</span>
+        </div>
+        <div class="card">
+            <div class="issue-title">원·달러 환율 1,380원대 안착… 수출 기업엔 호재</div>
+            <div class="summary-box">한 줄 요약: 원화 약세(달러 대비 원화 가치 하락)가 지속되며 수출 기업 실적 개선 기대감이 커지고 있다.</div>
+
+            <div class="bg-label">배경</div>
+            <div class="bg-text">환율이 오르면(원화 약세) 삼성·현대 같은 수출 기업은 달러로 번 돈을 원화로 바꿀 때 더 많이 받아 이득입니다. 반대로 원유·원자재처럼 해외에서 수입하는 물건값이 오르기 때문에 소비자 물가(인플레이션)에는 부담이 됩니다.</div>
+
+            <div class="perspectives">
+                <div class="prow">
+                    <span class="badge badge-c">🔵 보수</span>
+                    <span class="ptext">조선비즈·중앙은 "수출 대기업 실적 개선이 경기 회복의 마중물이 될 것"이라고 긍정적으로 분석한다.</span>
+                </div>
+                <div class="prow">
+                    <span class="badge badge-p">🔴 진보</span>
+                    <span class="ptext">한겨레경제는 "물가 상승으로 서민 부담이 늘어날 수 있다"며 취약 계층 지원 대책을 촉구한다.</span>
+                </div>
+                <div class="prow">
+                    <span class="badge badge-n">⚪ 중립</span>
+                    <span class="ptext">연합뉴스는 한국은행의 환율 개입 가능성과 다음 달 금리 결정 일정을 객관적으로 전달했다.</span>
+                </div>
+            </div>
+
+            <div class="keytip">
+                <span class="keytip-label">💡 한마디</span>
+                <span>환율은 수출엔 득, 물가엔 독. 내 지갑에 미치는 영향을 따져봐야 할 시점이다.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ─── 사회 ─── -->
+    <div class="section society">
+        <div class="section-label">
+            <div class="section-icon">🌐</div>
+            <span class="section-name">사회</span>
+        </div>
+        <div class="card">
+            <div class="issue-title">2026 수능 개편안 공청회… 문·이과 통합 유지 논란</div>
+            <div class="summary-box">한 줄 요약: 교육부가 발표한 수능 개편 초안을 두고 학부모·교사·수험생 의견이 엇갈리고 있다.</div>
+
+            <div class="bg-label">배경</div>
+            <div class="bg-text">2028학년도 수능부터 적용될 개편안에 대한 공청회(전문가·시민 의견을 모으는 공개 토론회)가 열렸습니다. 핵심 쟁점은 현재의 문·이과 통합 구조를 유지할지, 아니면 선택 과목을 더 줄일지입니다. 현장에선 "혼란이 너무 잦다"는 불만이 높습니다.</div>
+
+            <div class="perspectives">
+                <div class="prow">
+                    <span class="badge badge-c">🔵 보수</span>
+                    <span class="ptext">동아·중앙은 "잦은 제도 변경이 불안을 키운다"며 안정적 틀 유지를 주장하는 보수 교육 단체 입장을 부각했다.</span>
+                </div>
+                <div class="prow">
+                    <span class="badge badge-p">🔴 진보</span>
+                    <span class="ptext">한겨레는 "암기 위주 수능을 근본적으로 바꿔야 한다"며 교사·학생 참여형 개편을 요구하는 목소리를 전했다.</span>
+                </div>
+                <div class="prow">
+                    <span class="badge badge-n">⚪ 중립</span>
+                    <span class="ptext">KBS·연합뉴스는 공청회 현장 반응을 취합해 찬반 의견을 고르게 소개하고, 최종 확정 일정을 안내했다.</span>
+                </div>
+            </div>
+
+            <div class="keytip">
+                <span class="keytip-label">💡 한마디</span>
+                <span>어떤 방향이든 수험생이 예측하고 준비할 수 있도록 '빠른 확정'이 가장 중요하다.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ─── 용어 정리 ─── -->
+    <div class="vocab-card">
+        <div class="vocab-title">📚 오늘의 용어 정리</div>
+
+        <div class="vitem">
+            <div class="vterm">탄핵 인용 / 기각</div>
+            <div class="vdef">인용은 헌재가 탄핵 요청을 받아들이는 것(→ 대통령직 파면), 기각은 요청을 물리치는 것(→ 직무 복귀)입니다.</div>
+        </div>
+        <div class="vitem">
+            <div class="vterm">원·달러 환율</div>
+            <div class="vdef">달러 1달러를 사는 데 필요한 원화 금액. 숫자가 높을수록 원화 가치가 낮은 것(원화 약세)입니다.</div>
+        </div>
+        <div class="vitem">
+            <div class="vterm">공청회</div>
+            <div class="vdef">정부나 공공기관이 중요한 정책을 결정하기 전에 전문가·시민의 의견을 공개적으로 듣는 자리입니다.</div>
+        </div>
+    </div>
+
+    <div class="footer">매일 오전 8시 자동 업데이트 · 데일리 뉴스 브리핑</div>
+
+</div>
+
+<script>
+    const d = new Date();
+    const opts = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
+    document.getElementById('today-date').textContent = d.toLocaleDateString('ko-KR', opts);
+</script>
+
+</body>
+</html>
