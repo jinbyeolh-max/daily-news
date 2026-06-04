@@ -6,359 +6,292 @@
     <title>데일리 뉴스 브리핑</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
-            background: #F2F2F7;
-            color: #1D1D1F;
-            line-height: 1.6;
-        }
-
-        /* ── 상단 바 ── */
-        .topbar {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(255,255,255,0.78);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border-bottom: 0.5px solid rgba(0,0,0,0.12);
-            padding: 14px 24px;
-        }
-        .topbar-inner {
-            max-width: 760px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif; background: #F2F2F7; color: #1D1D1F; line-height: 1.6; }
+        .topbar { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.78); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border-bottom: 0.5px solid rgba(0,0,0,0.12); padding: 14px 24px; }
+        .topbar-inner { max-width: 760px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .topbar-title { font-size: 16px; font-weight: 600; }
-        .topbar-date {
-            font-size: 13px;
-            color: #6E6E73;
-            background: #F2F2F7;
-            padding: 4px 12px;
-            border-radius: 20px;
-        }
-
-        /* ── 본문 ── */
-        .container {
-            max-width: 760px;
-            margin: 0 auto;
-            padding: 36px 20px 60px;
-        }
-
-        /* ── 히어로 ── */
-        .hero {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        .hero h1 {
-            font-size: 36px;
-            font-weight: 700;
-            letter-spacing: -0.8px;
-            margin-bottom: 8px;
-        }
+        .topbar-date { font-size: 13px; color: #6E6E73; background: #F2F2F7; padding: 4px 12px; border-radius: 20px; }
+        .container { max-width: 760px; margin: 0 auto; padding: 36px 20px 60px; }
+        .hero { text-align: center; margin-bottom: 40px; }
+        .hero h1 { font-size: 36px; font-weight: 700; letter-spacing: -0.8px; margin-bottom: 8px; }
         .hero p { font-size: 17px; color: #6E6E73; }
-
-        /* ── 섹션 ── */
         .section { margin-bottom: 36px; }
-
-        .section-label {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 14px;
-        }
-        .section-icon {
-            width: 38px; height: 38px;
-            border-radius: 10px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 20px;
-        }
-        .politics  .section-icon { background: #EEF2FF; }
-        .economy   .section-icon { background: #F0FDF4; }
-        .society   .section-icon { background: #FFF7ED; }
-
-        .section-name {
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: -0.3px;
-        }
-
-        /* ── 카드 ── */
-        .card {
-            background: #fff;
-            border-radius: 20px;
-            padding: 24px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-        }
-
-        .issue-title {
-            font-size: 20px;
-            font-weight: 700;
-            letter-spacing: -0.3px;
-            margin-bottom: 12px;
-        }
-
-        .summary-box {
-            background: #F2F2F7;
-            border-radius: 12px;
-            border-left: 3px solid #007AFF;
-            padding: 12px 16px;
-            font-size: 15px;
-            color: #3A3A3C;
-            margin-bottom: 18px;
-        }
-
-        .bg-label {
-            font-size: 11px;
-            font-weight: 700;
-            color: #8E8E93;
-            letter-spacing: 0.8px;
-            text-transform: uppercase;
-            margin-bottom: 6px;
-        }
-        .bg-text {
-            font-size: 15px;
-            color: #3A3A3C;
-            line-height: 1.7;
-            margin-bottom: 20px;
-        }
-
-        /* ── 관점 표 ── */
-        .perspectives {
-            border: 1px solid #E5E5EA;
-            border-radius: 14px;
-            overflow: hidden;
-            margin-bottom: 16px;
-        }
-        .prow {
-            display: flex;
-            align-items: flex-start;
-            gap: 14px;
-            padding: 14px 16px;
-            border-bottom: 1px solid #F2F2F7;
-        }
+        .section-label { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+        .section-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+        .politics .section-icon { background: #EEF2FF; }
+        .economy .section-icon { background: #F0FDF4; }
+        .society .section-icon { background: #FFF7ED; }
+        .section-name { font-size: 22px; font-weight: 700; letter-spacing: -0.3px; }
+        .card { background: #fff; border-radius: 20px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 12px; }
+        .issue-num { font-size: 12px; font-weight: 700; color: #8E8E93; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 8px; }
+        .issue-title { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; margin-bottom: 12px; }
+        .summary-box { background: #F2F2F7; border-radius: 12px; border-left: 3px solid #007AFF; padding: 12px 16px; font-size: 15px; color: #3A3A3C; margin-bottom: 18px; }
+        .bg-label { font-size: 11px; font-weight: 700; color: #8E8E93; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 6px; }
+        .bg-text { font-size: 15px; color: #3A3A3C; line-height: 1.7; margin-bottom: 20px; }
+        .perspectives { border: 1px solid #E5E5EA; border-radius: 14px; overflow: hidden; margin-bottom: 16px; }
+        .prow { display: flex; align-items: flex-start; gap: 14px; padding: 14px 16px; border-bottom: 1px solid #F2F2F7; }
         .prow:last-child { border-bottom: none; }
-
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 12px;
-            font-weight: 600;
-            padding: 4px 10px;
-            border-radius: 20px;
-            white-space: nowrap;
-            min-width: 68px;
-            justify-content: center;
-        }
+        .badge { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 20px; white-space: nowrap; min-width: 68px; justify-content: center; }
         .badge-c { background: #EFF6FF; color: #1D4ED8; }
         .badge-p { background: #FEF2F2; color: #DC2626; }
         .badge-n { background: #F3F4F6; color: #374151; }
-
         .ptext { font-size: 14px; color: #3A3A3C; line-height: 1.65; flex: 1; padding-top: 2px; }
-
-        /* ── 한마디 ── */
-        .keytip {
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-            background: #F2F2F7;
-            border-radius: 12px;
-            padding: 14px 16px;
-            font-size: 14px;
-            color: #1D1D1F;
-        }
+        .keytip { display: flex; align-items: flex-start; gap: 8px; background: #F2F2F7; border-radius: 12px; padding: 14px 16px; font-size: 14px; color: #1D1D1F; margin-bottom: 16px; }
         .keytip-label { color: #007AFF; font-weight: 600; white-space: nowrap; }
-
-        /* ── 용어 카드 ── */
-        .vocab-card {
-            background: #fff;
-            border-radius: 20px;
-            padding: 24px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-        }
-        .vocab-title {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 18px;
-        }
-        .vitem {
-            padding: 13px 0;
-            border-bottom: 1px solid #F2F2F7;
-        }
+        .related { margin-top: 4px; }
+        .related-label { font-size: 11px; font-weight: 700; color: #8E8E93; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 8px; }
+        .related-links { display: flex; flex-direction: column; gap: 6px; }
+        .related-link { display: flex; align-items: center; gap: 8px; text-decoration: none; color: #007AFF; font-size: 14px; padding: 8px 12px; background: #F2F8FF; border-radius: 10px; transition: background 0.15s; }
+        .related-link:hover { background: #E5F0FF; }
+        .related-link-source { font-size: 12px; color: #8E8E93; margin-left: auto; white-space: nowrap; }
+        .vocab-card { background: #fff; border-radius: 20px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+        .vocab-title { font-size: 20px; font-weight: 700; margin-bottom: 18px; }
+        .vitem { padding: 13px 0; border-bottom: 1px solid #F2F2F7; }
         .vitem:last-child { border-bottom: none; padding-bottom: 0; }
         .vterm { font-size: 15px; font-weight: 600; margin-bottom: 3px; }
-        .vdef  { font-size: 14px; color: #6E6E73; line-height: 1.55; }
-
-        /* ── 푸터 ── */
-        .footer {
-            text-align: center;
-            margin-top: 48px;
-            font-size: 13px;
-            color: #8E8E93;
-        }
-
-        /* ── 로딩 상태 (내용 없을 때) ── */
-        .empty-state {
-            text-align: center;
-            padding: 60px 20px;
-            color: #8E8E93;
-        }
-        .empty-state h2 { font-size: 22px; font-weight: 600; margin-bottom: 10px; color: #1D1D1F; }
-        .empty-state p { font-size: 15px; line-height: 1.6; }
+        .vdef { font-size: 14px; color: #6E6E73; line-height: 1.55; }
+        .footer { text-align: center; margin-top: 48px; font-size: 13px; color: #8E8E93; }
     </style>
 </head>
 <body>
-
 <div class="topbar">
-    <div class="topbar-inner">
-        <span class="topbar-title">📰 데일리 뉴스 브리핑</span>
-        <span class="topbar-date" id="today-date"></span>
-    </div>
+  <div class="topbar-inner">
+    <span class="topbar-title">📰 데일리 뉴스 브리핑</span>
+    <span class="topbar-date">2026년 6월 4일 목요일</span>
+  </div>
 </div>
-
 <div class="container">
+  <div class="hero">
+    <h1>오늘의 핵심 뉴스</h1>
+    <p>정치 · 경제 · 사회를 다양한 시각으로</p>
+  </div>
 
-    <div class="hero">
-        <h1>오늘의 핵심 뉴스</h1>
-        <p>정치 · 경제 · 사회를 다양한 시각으로</p>
+  <!-- 정치 -->
+  <div class="section politics">
+    <div class="section-label"><div class="section-icon">🏛</div><span class="section-name">정치</span></div>
+
+    <div class="card">
+      <div class="issue-num">이슈 1</div>
+      <div class="issue-title">6.3 지방선거 결과 — 민주당 12곳 압승, 오세훈 극적 역전</div>
+      <div class="summary-box">한 줄 요약: 어제(6월 3일) 치러진 지방선거에서 더불어민주당이 16개 광역단체장 중 12곳을 휩쓸었고, 서울시장은 국민의힘 오세훈 후보가 0.6%p 차 초박빙 역전승을 거뒀다.</div>
+      <div class="bg-label">배경</div>
+      <div class="bg-text">광역단체장(시도지사)이란 서울시장·경기도지사처럼 광역 지방자치단체를 이끄는 수장을 말합니다. 이번 선거에서 더불어민주당은 경기(추미애), 인천, 부산, 대전 등 12곳을 차지하며 지방 권력을 장악했습니다. 서울시장 선거는 개표 막판 오세훈 후보가 역전해 5선에 성공했고, 전국 투표율은 역대 두 번째로 높게 나타났습니다.</div>
+      <div class="perspectives">
+        <div class="prow"><span class="badge badge-c">🔵 보수</span><span class="ptext">서울을 지킨 것은 의미 있지만, 전국적 패배는 뼈아프다. 당의 전면 쇄신 없이는 회복이 어렵다는 자성의 목소리가 크다.</span></div>
+        <div class="prow"><span class="badge badge-p">🔴 진보</span><span class="ptext">이재명 정부에 대한 민심의 확인이다. 지방 권력까지 확보했으니 이제 민생 개혁을 흔들림 없이 추진해야 한다.</span></div>
+        <div class="prow"><span class="badge badge-n">⚪ 중립</span><span class="ptext">투표율이 높았다는 것은 유권자 관심이 컸다는 뜻. 여론조사가 '샤이 보수' 표심을 읽지 못해 예측에 실패한 점도 주목할 만하다.</span></div>
+      </div>
+      <div class="keytip"><span class="keytip-label">💡 한마디</span><span>민주당이 지방 권력까지 장악했지만, 서울 초박빙이 보여주듯 '민심은 언제든 바뀔 수 있다'는 경고도 담겨 있다.</span></div>
+      <div class="related">
+        <div class="related-label">🔗 관련 기사</div>
+        <div class="related-links">
+          <a href="https://www.seoul.co.kr/news/politics/local-election2026/2026/06/04/20260604500091" target="_blank" class="related-link">오세훈, 서울시장 5선 성공…출구조사 뒤집고 당선 <span class="related-link-source">서울신문</span></a>
+          <a href="https://imnews.imbc.com/replay/2026/nw1400/article/6827731_36974.html" target="_blank" class="related-link">오세훈 '대역전'‥민주 12곳·국힘 4곳 승리 <span class="related-link-source">MBC</span></a>
+          <a href="https://www.ytn.co.kr/_ln/0101_202606040642459730" target="_blank" class="related-link">민주당, 시도지사 16곳중 12곳 우세 '압승' <span class="related-link-source">YTN</span></a>
+        </div>
+      </div>
     </div>
 
-    <!-- ─── 정치 ─── -->
-    <div class="section politics">
-        <div class="section-label">
-            <div class="section-icon">🏛</div>
-            <span class="section-name">정치</span>
+    <div class="card">
+      <div class="issue-num">이슈 2</div>
+      <div class="issue-title">이재명 정부 '2기 체제' 개편 착수 — 총리 교체 등 내각 쇄신 본격화</div>
+      <div class="summary-box">한 줄 요약: 지방선거 승리를 발판으로 이재명 대통령이 국정 2기 체제 구성을 위한 개편을 시작했으며, 총리 교체가 유력하게 거론되고 있다.</div>
+      <div class="bg-label">배경</div>
+      <div class="bg-text">이재명 정부는 대선 당선 1년이 지난 시점에서 지방선거까지 승리하며 국정 동력을 높일 기회를 맞았습니다. 정성호·강훈식 등 후임 총리 후보가 거론되고 있으며, 선거 이후 청와대가 내각 개편 작업에 착수했다고 복수의 매체가 보도했습니다. AI 3강 진입, 주택 공급, 민생 물가 안정 등 핵심 과제를 2기 체제에서 본격 추진할 예정입니다.</div>
+      <div class="perspectives">
+        <div class="prow"><span class="badge badge-c">🔵 보수</span><span class="ptext">지방선거 승리를 계기로 일방적 국정 독주가 심화될 수 있다고 우려한다. 야당과의 협치(함께 국정을 운영하는 것)가 필요하다.</span></div>
+        <div class="prow"><span class="badge badge-p">🔴 진보</span><span class="ptext">민심이 확인된 만큼 미뤘던 개혁 과제를 강하게 밀어붙일 적기다. 내각 쇄신으로 실행력을 높여야 한다.</span></div>
+        <div class="prow"><span class="badge badge-n">⚪ 중립</span><span class="ptext">누가 총리가 되느냐보다 실제로 민생 문제가 해결되는지가 중요하다. 개각이 국정 성과로 이어지는지 지켜봐야 한다.</span></div>
+      </div>
+      <div class="keytip"><span class="keytip-label">💡 한마디</span><span>'2기 체제'가 성공하려면 인사(사람 바꾸기) 못지않게 정책 실행력이 핵심이다.</span></div>
+      <div class="related">
+        <div class="related-label">🔗 관련 기사</div>
+        <div class="related-links">
+          <a href="https://www.fnnews.com/news/202606041807211848" target="_blank" class="related-link">후임 총리에 정성호·강훈식·한성숙 거론 [지방선거 후폭풍] <span class="related-link-source">파이낸셜뉴스</span></a>
+          <a href="https://www.korea.kr/govVision/" target="_blank" class="related-link">이재명정부 123대 국정과제 <span class="related-link-source">대한민국 정책브리핑</span></a>
         </div>
-        <div class="card">
-            <div class="issue-title">대통령 탄핵 심판 선고 D-3, 각 당 대응 본격화</div>
-            <div class="summary-box">한 줄 요약: 헌재 선고를 앞두고 여야가 상반된 대국민 메시지를 쏟아내며 여론전에 돌입했다.</div>
-
-            <div class="bg-label">배경</div>
-            <div class="bg-text">헌법재판소(나라의 법이 헌법에 맞는지 판단하는 최고 법원)가 이번 주 안으로 대통령 탄핵에 대한 최종 결정을 내릴 예정입니다. 탄핵이 인용되면 대통령직을 잃고, 기각되면 복귀하게 됩니다. 이 결정을 앞두고 여야 정당들이 각자 유리한 방향으로 여론을 움직이려 하고 있습니다.</div>
-
-            <div class="perspectives">
-                <div class="prow">
-                    <span class="badge badge-c">🔵 보수</span>
-                    <span class="ptext">조선·동아 등은 "탄핵 기각 시 국정 안정화가 시급하다"며 조기 복귀 시나리오를 긍정적으로 다루고 있다.</span>
-                </div>
-                <div class="prow">
-                    <span class="badge badge-p">🔴 진보</span>
-                    <span class="ptext">한겨레·경향은 "국민 다수가 탄핵 인용을 요구하고 있다"며 헌재가 민의를 따라야 한다고 강조한다.</span>
-                </div>
-                <div class="prow">
-                    <span class="badge badge-n">⚪ 중립</span>
-                    <span class="ptext">연합뉴스·KBS는 선고 일정과 절차를 중립적으로 전하며 결과에 따른 후속 일정을 정리했다.</span>
-                </div>
-            </div>
-
-            <div class="keytip">
-                <span class="keytip-label">💡 한마디</span>
-                <span>헌재 결정이 어떻게 나오든 정국 변화가 불가피하다. 선고 이후 여야의 움직임을 주목할 것.</span>
-            </div>
-        </div>
+      </div>
     </div>
 
-    <!-- ─── 경제 ─── -->
-    <div class="section economy">
-        <div class="section-label">
-            <div class="section-icon">💰</div>
-            <span class="section-name">경제</span>
+    <div class="card">
+      <div class="issue-num">이슈 3</div>
+      <div class="issue-title">국민의힘 선거 3연패 — 당 재건 방향 놓고 내부 논쟁</div>
+      <div class="summary-box">한 줄 요약: 국민의힘이 2024년 총선, 2025년 대선에 이어 이번 지방선거까지 잇달아 지면서 당 재건과 새 리더십 구성을 놓고 내부 갈등이 예상된다.</div>
+      <div class="bg-label">배경</div>
+      <div class="bg-text">국민의힘은 이번 선거에서 16곳 중 4곳(서울·대구·경북·제주)만 지켰습니다. 특히 서울시장은 극적 역전으로 간신히 수성했지만, 경기·인천·부산 등 주요 지역을 모두 잃었습니다. 내란죄 재판을 받는 추경호 대구시장의 당선 등 예민한 사안도 뒤섞이면서 당 방향을 놓고 논쟁이 거세질 전망입니다.</div>
+      <div class="perspectives">
+        <div class="prow"><span class="badge badge-c">🔵 보수</span><span class="ptext">이념 정체성을 지키면서도 젊은 층과 중도층을 아우를 수 있는 새 얼굴이 필요하다는 쇄신파 의견이 강하다.</span></div>
+        <div class="prow"><span class="badge badge-p">🔴 진보</span><span class="ptext">민심이 세 번 연속 등을 돌린 것은 정책과 비전의 실패다. 진정성 있는 성찰 없이 구호만 바꾸는 쇄신은 의미 없다.</span></div>
+        <div class="prow"><span class="badge badge-n">⚪ 중립</span><span class="ptext">건강한 민주주의를 위해서는 강한 야당이 필요하다. 국민의힘이 정치 개혁을 주도하는 야당으로 거듭나는 것이 과제다.</span></div>
+      </div>
+      <div class="keytip"><span class="keytip-label">💡 한마디</span><span>3연패한 정당이 어떻게 쇄신하느냐는 여당 못지않게 한국 정치 전체에 중요한 문제다.</span></div>
+      <div class="related">
+        <div class="related-label">🔗 관련 기사</div>
+        <div class="related-links">
+          <a href="https://www.fnnews.com/news/202606041713201926" target="_blank" class="related-link">'샤이 보수' 벽에 막힌 여론조사…격전지 예측 빗나가 <span class="related-link-source">파이낸셜뉴스</span></a>
+          <a href="https://www.youtube.com/watch?v=48mPZsbEg6Y" target="_blank" class="related-link">내란죄 재판 추경호 당선…대구 선거 분석 <span class="related-link-source">MBC</span></a>
         </div>
-        <div class="card">
-            <div class="issue-title">원·달러 환율 1,380원대 안착… 수출 기업엔 호재</div>
-            <div class="summary-box">한 줄 요약: 원화 약세(달러 대비 원화 가치 하락)가 지속되며 수출 기업 실적 개선 기대감이 커지고 있다.</div>
+      </div>
+    </div>
+  </div>
 
-            <div class="bg-label">배경</div>
-            <div class="bg-text">환율이 오르면(원화 약세) 삼성·현대 같은 수출 기업은 달러로 번 돈을 원화로 바꿀 때 더 많이 받아 이득입니다. 반대로 원유·원자재처럼 해외에서 수입하는 물건값이 오르기 때문에 소비자 물가(인플레이션)에는 부담이 됩니다.</div>
+  <!-- 경제 -->
+  <div class="section economy">
+    <div class="section-label"><div class="section-icon">💰</div><span class="section-name">경제</span></div>
 
-            <div class="perspectives">
-                <div class="prow">
-                    <span class="badge badge-c">🔵 보수</span>
-                    <span class="ptext">조선비즈·중앙은 "수출 대기업 실적 개선이 경기 회복의 마중물이 될 것"이라고 긍정적으로 분석한다.</span>
-                </div>
-                <div class="prow">
-                    <span class="badge badge-p">🔴 진보</span>
-                    <span class="ptext">한겨레경제는 "물가 상승으로 서민 부담이 늘어날 수 있다"며 취약 계층 지원 대책을 촉구한다.</span>
-                </div>
-                <div class="prow">
-                    <span class="badge badge-n">⚪ 중립</span>
-                    <span class="ptext">연합뉴스는 한국은행의 환율 개입 가능성과 다음 달 금리 결정 일정을 객관적으로 전달했다.</span>
-                </div>
-            </div>
-
-            <div class="keytip">
-                <span class="keytip-label">💡 한마디</span>
-                <span>환율은 수출엔 득, 물가엔 독. 내 지갑에 미치는 영향을 따져봐야 할 시점이다.</span>
-            </div>
+    <div class="card">
+      <div class="issue-num">이슈 1</div>
+      <div class="issue-title">반도체 수출 651% 폭증 — 삼성전자 시총 2000조 돌파, 코스피 9000 가시권</div>
+      <div class="summary-box">한 줄 요약: AI 열풍으로 HBM(고대역폭 메모리) 수요가 폭발하면서 한국의 대미 반도체 수출이 전년 대비 651% 급증하고, 삼성전자 시가총액이 처음으로 2000조 원을 넘어섰다.</div>
+      <div class="bg-label">배경</div>
+      <div class="bg-text">인공지능(AI) 서버를 만들려면 연산 속도가 빠른 HBM(고대역폭 메모리·High Bandwidth Memory)이 반드시 필요합니다. 세계에서 HBM을 가장 잘 만드는 나라가 한국이라, 삼성전자와 SK하이닉스로 주문이 폭주하고 있습니다. 덕분에 코스피(한국 주식 종합지수)가 9000포인트 돌파를 눈앞에 뒀고, 삼성전자의 시가총액(주식 전체 가치)이 사상 처음 2000조 원을 넘었습니다.</div>
+      <div class="perspectives">
+        <div class="prow"><span class="badge badge-c">🔵 보수</span><span class="ptext">규제 완화와 기업 친화 환경 덕분에 반도체 기업이 경쟁력을 유지할 수 있었다. 정부 개입보다 기업 자율에 맡겨야 한다.</span></div>
+        <div class="prow"><span class="badge badge-p">🔴 진보</span><span class="ptext">반도체 특수 수혜가 대기업 주주에게 집중되고 있다. 이익이 협력 중소기업·노동자에게도 고루 돌아가도록 정책이 필요하다.</span></div>
+        <div class="prow"><span class="badge badge-n">⚪ 중립</span><span class="ptext">주가 상승이 실물 경제(고용·임금·소비)로 이어지는지가 핵심이다. AI 투자 사이클이 언제 꺾일지도 주목해야 한다.</span></div>
+      </div>
+      <div class="keytip"><span class="keytip-label">💡 한마디</span><span>AI 시대에 반도체는 '새로운 석유' — 한국이 이 파도를 얼마나 오래, 얼마나 넓게 타느냐가 관건이다.</span></div>
+      <div class="related">
+        <div class="related-label">🔗 관련 기사</div>
+        <div class="related-links">
+          <a href="https://imnews.imbc.com/replay/2026/nwdesk/article/6826849_37004.html" target="_blank" class="related-link">날아가는 반도체 업고 9천피도 가시권‥삼성전자 시총 '2천조' 돌파 <span class="related-link-source">MBC</span></a>
+          <a href="https://www.epnc.co.kr/news/articleView.html?idxno=400056" target="_blank" class="related-link">AI 붐이 만든 1조 달러 시대, 2026년 반도체 시장 폭발적 성장 <span class="related-link-source">테크월드</span></a>
         </div>
+      </div>
     </div>
 
-    <!-- ─── 사회 ─── -->
-    <div class="section society">
-        <div class="section-label">
-            <div class="section-icon">🌐</div>
-            <span class="section-name">사회</span>
+    <div class="card">
+      <div class="issue-num">이슈 2</div>
+      <div class="issue-title">한미 관세 협상 — 철강 관세 인하 vs 새 추가 관세 압박 동시 진행</div>
+      <div class="summary-box">한 줄 요약: 미국이 한국산 철강 파생상품 관세를 25%→15%로 낮춰줬지만, 동시에 강제노동 문제를 이유로 12.5% 추가 관세를 압박하고 있어 통상(무역) 갈등이 계속되고 있다.</div>
+      <div class="bg-label">배경</div>
+      <div class="bg-text">관세(세금)란 외국에서 물건을 들여올 때 부과하는 세금으로, 관세가 높으면 수출하는 나라 입장에서는 물건값이 비싸져 경쟁력이 떨어집니다. 미국은 지난해 한국과 합의해 자동차·철강 관세를 25%→15%로 낮췄지만, 이번에는 강제노동(노예노동) 관련 수입품 차단이 미흡하다는 이유로 12.5%의 새 관세를 추진 중입니다. 한국 정부는 공청회 등을 통해 반박에 나섰습니다.</div>
+      <div class="perspectives">
+        <div class="prow"><span class="badge badge-c">🔵 보수</span><span class="ptext">한미 동맹을 유지하면서 실리 협상으로 관세 피해를 최소화해야 한다. 미국의 요구를 일부 수용하는 실용적 접근이 필요하다.</span></div>
+        <div class="prow"><span class="badge badge-p">🔴 진보</span><span class="ptext">미국의 일방적 관세 압박은 부당하다. WTO(세계무역기구) 등 다자 체계를 통해 미국의 무역 횡포에 맞서야 한다.</span></div>
+        <div class="prow"><span class="badge badge-n">⚪ 중립</span><span class="ptext">관세 협상 결과는 자동차·철강 등 수출 산업과 일자리에 직결된다. 외교적 해법과 산업 경쟁력 강화를 동시에 추진해야 한다.</span></div>
+      </div>
+      <div class="keytip"><span class="keytip-label">💡 한마디</span><span>미국과의 관세 협상은 '한 번 끝나는 일'이 아니라 계속 이어지는 협상 게임이다 — 긴장을 늦출 수 없다.</span></div>
+      <div class="related">
+        <div class="related-label">🔗 관련 기사</div>
+        <div class="related-links">
+          <a href="https://www.seoul.co.kr/news/economy/2026/06/03/20260603500079" target="_blank" class="related-link">美, 철강 파생상품 관세 25→15% 인하 <span class="related-link-source">서울신문</span></a>
+          <a href="https://www.joongangenews.com/news/articleView.html?idxno=523520" target="_blank" class="related-link">美 12.5% 추가 관세 압박 속…통상본부장 "기존 관세합의 준수 의향 재확인" <span class="related-link-source">중앙이코노미뉴스</span></a>
         </div>
-        <div class="card">
-            <div class="issue-title">2026 수능 개편안 공청회… 문·이과 통합 유지 논란</div>
-            <div class="summary-box">한 줄 요약: 교육부가 발표한 수능 개편 초안을 두고 학부모·교사·수험생 의견이 엇갈리고 있다.</div>
-
-            <div class="bg-label">배경</div>
-            <div class="bg-text">2028학년도 수능부터 적용될 개편안에 대한 공청회(전문가·시민 의견을 모으는 공개 토론회)가 열렸습니다. 핵심 쟁점은 현재의 문·이과 통합 구조를 유지할지, 아니면 선택 과목을 더 줄일지입니다. 현장에선 "혼란이 너무 잦다"는 불만이 높습니다.</div>
-
-            <div class="perspectives">
-                <div class="prow">
-                    <span class="badge badge-c">🔵 보수</span>
-                    <span class="ptext">동아·중앙은 "잦은 제도 변경이 불안을 키운다"며 안정적 틀 유지를 주장하는 보수 교육 단체 입장을 부각했다.</span>
-                </div>
-                <div class="prow">
-                    <span class="badge badge-p">🔴 진보</span>
-                    <span class="ptext">한겨레는 "암기 위주 수능을 근본적으로 바꿔야 한다"며 교사·학생 참여형 개편을 요구하는 목소리를 전했다.</span>
-                </div>
-                <div class="prow">
-                    <span class="badge badge-n">⚪ 중립</span>
-                    <span class="ptext">KBS·연합뉴스는 공청회 현장 반응을 취합해 찬반 의견을 고르게 소개하고, 최종 확정 일정을 안내했다.</span>
-                </div>
-            </div>
-
-            <div class="keytip">
-                <span class="keytip-label">💡 한마디</span>
-                <span>어떤 방향이든 수험생이 예측하고 준비할 수 있도록 '빠른 확정'이 가장 중요하다.</span>
-            </div>
-        </div>
+      </div>
     </div>
 
-    <!-- ─── 용어 정리 ─── -->
-    <div class="vocab-card">
-        <div class="vocab-title">📚 오늘의 용어 정리</div>
+    <div class="card">
+      <div class="issue-num">이슈 3</div>
+      <div class="issue-title">원·달러 환율 1530원대 — 2009년 이후 최고치, 고물가 우려</div>
+      <div class="summary-box">한 줄 요약: 원화 가치가 크게 하락해 달러당 1530원대를 기록하며 글로벌 금융위기 이후 최고 수준을 나타내고, 외국인 투자자가 코스피에서 대규모 매도세를 보였다.</div>
+      <div class="bg-label">배경</div>
+      <div class="bg-text">환율이란 원화와 달러를 교환하는 비율입니다. 환율이 1530원이라면 1달러를 사는 데 1530원이 필요하다는 뜻으로, 환율이 오를수록 원화 가치는 떨어집니다. 원화 약세(환율 상승)는 해외에서 물건을 수입할 때 더 비싸게 사야 하므로 수입 원자재 의존도가 높은 기업과 가계의 부담이 커집니다. 오늘 외국인 투자자가 코스피에서 대규모 순매도(주식을 팔아 달러로 바꿔나감)를 진행한 것도 환율 상승을 부추겼습니다.</div>
+      <div class="perspectives">
+        <div class="prow"><span class="badge badge-c">🔵 보수</span><span class="ptext">고환율은 수출 기업에 유리한 면도 있다. 시장 자율에 맡기되 과도한 쏠림에만 외환당국이 개입하면 된다.</span></div>
+        <div class="prow"><span class="badge badge-p">🔴 진보</span><span class="ptext">고환율은 서민 물가를 올린다. 외국인 자금 유출을 막는 제도적 장치와 내수 살리기 대책을 병행해야 한다.</span></div>
+        <div class="prow"><span class="badge badge-n">⚪ 중립</span><span class="ptext">환율은 수출엔 호재, 수입·소비엔 악재다. 어느 쪽이 더 클지 데이터를 보면서 신중하게 정책을 조율해야 한다.</span></div>
+      </div>
+      <div class="keytip"><span class="keytip-label">💡 한마디</span><span>달러가 비쌀수록 해외여행·수입품 값이 오른다 — 환율은 멀리 있는 것 같지만 일상 물가와 직결된다.</span></div>
+      <div class="related">
+        <div class="related-label">🔗 관련 기사</div>
+        <div class="related-links">
+          <a href="https://kr.investing.com/currencies/usd-krw" target="_blank" class="related-link">USD/KRW 원달러 환율 실시간 <span class="related-link-source">Investing.com</span></a>
+          <a href="https://namu.wiki/w/2025-2026%EB%85%84%20%EC%9B%90%ED%99%94%20%EA%B3%A0%ED%99%98%EC%9C%A8%20%EC%82%AC%ED%83%9C" target="_blank" class="related-link">2025-2026년 원화 고환율 사태 정리 <span class="related-link-source">나무위키</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
 
-        <div class="vitem">
-            <div class="vterm">탄핵 인용 / 기각</div>
-            <div class="vdef">인용은 헌재가 탄핵 요청을 받아들이는 것(→ 대통령직 파면), 기각은 요청을 물리치는 것(→ 직무 복귀)입니다.</div>
+  <!-- 사회 -->
+  <div class="section society">
+    <div class="section-label"><div class="section-icon">🌐</div><span class="section-name">사회</span></div>
+
+    <div class="card">
+      <div class="issue-num">이슈 1</div>
+      <div class="issue-title">합계출산율 0.8명대 회복 — 4년 만의 반등, 구조적 전환인가 일시 현상인가</div>
+      <div class="summary-box">한 줄 요약: 2025년 한국의 합계출산율이 0.80명을 기록하며 4년 만에 0.8명대를 회복했고, 2026년 1월 출생아도 전년 대비 11.7% 늘어 반등 흐름이 이어지고 있다.</div>
+      <div class="bg-label">배경</div>
+      <div class="bg-text">합계출산율이란 여성 한 명이 평생 낳을 것으로 예상되는 평균 자녀 수입니다. 2023년 0.72명으로 세계 최저를 기록했던 한국이 2025년 0.80명으로 올라섰습니다. 주된 이유는 '2차 에코붐 세대(1991~1995년생 약 360만 명)'가 30대 초반에 진입하면서 출산 적령기 여성 인구가 늘었기 때문입니다. 하지만 이 세대 효과가 끝나면 다시 떨어질 수 있다는 우려도 있습니다.</div>
+      <div class="perspectives">
+        <div class="prow"><span class="badge badge-c">🔵 보수</span><span class="ptext">출산 인센티브(장려금·세제혜택)와 가정 친화적 문화 확산이 반등의 씨앗이다. 현금 지원보다 일·육아 병행 환경을 더 강화해야 한다.</span></div>
+        <div class="prow"><span class="badge badge-p">🔴 진보</span><span class="ptext">에코붐 효과는 일시적이다. 집값·사교육비·고용 불안 등 구조적 원인을 해결하지 않으면 다시 추락할 것이다.</span></div>
+        <div class="prow"><span class="badge badge-n">⚪ 중립</span><span class="ptext">반등은 긍정적이지만 아직 인구 유지에 필요한 2.1명과는 큰 차이다. 단기 수치보다 10년 추세를 보면서 정책을 점검해야 한다.</span></div>
+      </div>
+      <div class="keytip"><span class="keytip-label">💡 한마디</span><span>0.8명 회복은 반가운 소식이지만, 진짜 반전이 되려면 '아이 낳고 싶은 사회'를 만드는 근본 변화가 필요하다.</span></div>
+      <div class="related">
+        <div class="related-label">🔗 관련 기사</div>
+        <div class="related-links">
+          <a href="https://imnews.imbc.com/news/2026/econo/article/6790451_36932.html" target="_blank" class="related-link">2025년 합계출산율 0.8명 넘을 듯‥2026년 새해엔 더 높아질까? <span class="related-link-source">MBC</span></a>
+          <a href="https://www.newsspace.kr/news/article.html?no=12814" target="_blank" class="related-link">한국 출생률, 사상최저권에서 '바닥반등' 이유 — 구조적 반전 vs 일시적 순풍 <span class="related-link-source">뉴스스페이스</span></a>
         </div>
-        <div class="vitem">
-            <div class="vterm">원·달러 환율</div>
-            <div class="vdef">달러 1달러를 사는 데 필요한 원화 금액. 숫자가 높을수록 원화 가치가 낮은 것(원화 약세)입니다.</div>
-        </div>
-        <div class="vitem">
-            <div class="vterm">공청회</div>
-            <div class="vdef">정부나 공공기관이 중요한 정책을 결정하기 전에 전문가·시민의 의견을 공개적으로 듣는 자리입니다.</div>
-        </div>
+      </div>
     </div>
 
-    <div class="footer">매일 오전 8시 자동 업데이트 · 데일리 뉴스 브리핑</div>
+    <div class="card">
+      <div class="issue-num">이슈 2</div>
+      <div class="issue-title">지역 소멸 위기 — 지방선거 핵심 이슈로 부상, 의료·교통 붕괴 경보</div>
+      <div class="summary-box">한 줄 요약: 이번 지방선거에서 비수도권 인구 감소와 지방 의료·교통 인프라 붕괴가 핵심 쟁점으로 등장했으며, 당선된 단체장들이 지역 소멸 대책을 최우선 과제로 내세웠다.</div>
+      <div class="bg-label">배경</div>
+      <div class="bg-text">지역 소멸이란 인구가 급격히 줄어 마을·도시 기능이 무너지는 현상을 말합니다. 한국에서는 수도권 집중이 심화되면서 지방 소도시에서는 병원·학교·버스 노선이 하나둘 사라지고 있습니다. 이번 지방선거에서 비수도권 유권자들은 '의료 공백'과 '대중교통 소멸'을 가장 절박한 문제로 꼽았으며, 지방 당선인들이 대거 이 이슈를 공약 1순위로 내세웠습니다.</div>
+      <div class="perspectives">
+        <div class="prow"><span class="badge badge-c">🔵 보수</span><span class="ptext">규제 완화와 세금 혜택으로 민간 기업이 지방에 투자하도록 유도해야 한다. 정부 주도 지원보다 시장 중심 접근이 효과적이다.</span></div>
+        <div class="prow"><span class="badge badge-p">🔴 진보</span><span class="ptext">공공 의료·교통은 시장에 맡길 수 없다. 국가가 균형 발전 예산을 대폭 늘려 지방 공공 서비스를 책임져야 한다.</span></div>
+        <div class="prow"><span class="badge badge-n">⚪ 중립</span><span class="ptext">지역 소멸은 단기 정책으로 해결되지 않는 구조적 문제다. 인구·산업·교육을 아우르는 장기 종합 계획이 필요하다.</span></div>
+      </div>
+      <div class="keytip"><span class="keytip-label">💡 한마디</span><span>지방에서 병원이 사라지면 아픈 사람이 몇 시간을 달려야 한다 — 지역 소멸은 통계가 아니라 삶의 문제다.</span></div>
+      <div class="related">
+        <div class="related-label">🔗 관련 기사</div>
+        <div class="related-links">
+          <a href="https://issue.daum.net/election/2026" target="_blank" class="related-link">2026 지방선거 — 지역 현안 이슈 모음 <span class="related-link-source">다음뉴스</span></a>
+          <a href="https://www.ytn.co.kr/_ln/0101_202606032332578964" target="_blank" class="related-link">6.3 지방선거 개표 속속…여야 성적표는? <span class="related-link-source">YTN</span></a>
+        </div>
+      </div>
+    </div>
 
+    <div class="card">
+      <div class="issue-num">이슈 3</div>
+      <div class="issue-title">정부 'AI 3강' 국정과제 본격화 — 사회 전반에 AI 도입 가속</div>
+      <div class="summary-box">한 줄 요약: 이재명 정부가 'AI 3강(세계 3위 AI 강국)' 진입을 국정 핵심 목표로 내걸고 데이터·반도체·인재·전력 등 전방위 투자 계획을 추진 중이며, 학교·공공기관의 AI 도입도 빠르게 확산되고 있다.</div>
+      <div class="bg-label">배경</div>
+      <div class="bg-text">인공지능(AI)은 이제 특정 분야를 넘어 교육·의료·행정 전반으로 확산되고 있습니다. 정부는 미국·중국과 경쟁하기 위해 반도체 공급망 강화, AI 전문 인재 10만 명 육성, 데이터센터 전력 공급 등을 포함한 종합 계획을 내놨습니다. 재정경제부도 AI를 활용한 내부 업무 혁신을 추진하겠다고 밝혔습니다. 한편으로는 AI로 인한 일자리 감소와 개인정보 보호 문제를 우려하는 시각도 커지고 있습니다.</div>
+      <div class="perspectives">
+        <div class="prow"><span class="badge badge-c">🔵 보수</span><span class="ptext">AI 혁신은 민간 기업이 주도해야 한다. 정부 규제를 최소화하고 기업이 자유롭게 실험할 수 있는 환경을 만들어야 경쟁에서 이길 수 있다.</span></div>
+        <div class="prow"><span class="badge badge-p">🔴 진보</span><span class="ptext">AI로 사라지는 일자리에 대한 사회 안전망을 먼저 만들어야 한다. 기술 성장이 불평등을 심화시키지 않도록 분배 정책도 함께 가야 한다.</span></div>
+        <div class="prow"><span class="badge badge-n">⚪ 중립</span><span class="ptext">기술 강국이 되려면 경쟁력과 윤리·규제 체계를 동시에 정비해야 한다. 속도보다 방향이 더 중요한 시점이다.</span></div>
+      </div>
+      <div class="keytip"><span class="keytip-label">💡 한마디</span><span>AI 시대에 가장 필요한 것은 기술 그 자체가 아니라, 기술을 사람을 위해 쓰는 방법을 아는 것이다.</span></div>
+      <div class="related">
+        <div class="related-label">🔗 관련 기사</div>
+        <div class="related-links">
+          <a href="https://www.korea.kr/govVision/" target="_blank" class="related-link">이재명 정부 123대 국정과제 — AI 3강 진입 계획 <span class="related-link-source">대한민국 정책브리핑</span></a>
+          <a href="https://www.korea.kr/briefing/policyBriefingView.do?newsId=156761126" target="_blank" class="related-link">2026년 세계경제 전망(업데이트) 발표 <span class="related-link-source">기획재정부</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 용어 정리 -->
+  <div class="vocab-card">
+    <div class="vocab-title">📚 오늘의 용어 정리</div>
+    <div class="vitem">
+      <div class="vterm">HBM (고대역폭 메모리, High Bandwidth Memory)</div>
+      <div class="vdef">AI 연산에 쓰이는 초고속 메모리 반도체. 일반 메모리보다 데이터 처리 속도가 수십 배 빠르며, 삼성전자·SK하이닉스가 세계 시장을 주도하고 있다. AI 열풍으로 수요가 폭발적으로 늘어 한국 반도체 수출의 핵심 품목이 됐다.</div>
+    </div>
+    <div class="vitem">
+      <div class="vterm">합계출산율</div>
+      <div class="vdef">여성 한 명이 가임 기간(15~49세) 동안 낳을 것으로 예상되는 평균 자녀 수. 인구를 유지하려면 2.1명이 필요한데, 한국은 2023년 0.72명으로 세계 최저였다가 2025년 0.80명으로 소폭 반등했다.</div>
+    </div>
+    <div class="vitem">
+      <div class="vterm">광역단체장</div>
+      <div class="vdef">특별시·광역시·특별자치시·도·특별자치도 등 광역 지방자치단체를 이끄는 수장. 서울시장, 경기도지사, 부산시장 등이 여기에 해당하며, 4년마다 실시하는 지방선거에서 주민이 직접 선출한다.</div>
+    </div>
+    <div class="vitem">
+      <div class="vterm">관세 (Tariff)</div>
+      <div class="vdef">외국 상품이 국내로 들어올 때 부과하는 세금. 관세가 높아지면 수입품 가격이 비싸져 자국 기업이 유리해지지만, 무역 상대국의 보복 관세를 유발할 수 있다. 한미 관세 협상은 양국 수출입 산업과 일자리에 직접 영향을 준다.</div>
+    </div>
+  </div>
+  <div class="footer">매일 오전 8시 자동 업데이트 · 데일리 뉴스 브리핑</div>
 </div>
-
-<script>
-    const d = new Date();
-    const opts = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
-    document.getElementById('today-date').textContent = d.toLocaleDateString('ko-KR', opts);
-</script>
-
 </body>
 </html>
